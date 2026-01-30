@@ -1,21 +1,17 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/LoginPage';
 
 test('valid login', async ({ page }) => {
     
-  //Navigate to the page
-  await page.goto('https://automationexercise.com/');
+  const loginpage = new LoginPage(page);
 
-  //Verify title of the page
+  await loginpage.navigateToHomePage();
   await expect(page).toHaveTitle('Automation Exercise');
 
-  //Click on the Login link
-  await page.getByRole('link', {name : ' Signup / Login'}).click();
+  await loginpage.navigateToLoginPage();
 
-  //Enter username and password and click Login
-  await page.locator('[data-qa= "login-email"]').fill('testadmin@test.com');
-  await page.getByPlaceholder('Password').fill('Test@1234');
-  await page.locator('[data-qa= "login-button"]').click();
-
-  //Verify the logged in text is displayed to confirm login
+  await loginpage.login('testadmin@test.com', 'Test@1234')
   await expect(page.getByText(/Logged in as/i)).toBeVisible();
+
+
 });
