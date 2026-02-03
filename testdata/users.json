@@ -1,0 +1,11 @@
+{
+    "validuser" : {
+        "email" : "testadmin@test.com",
+        "password" : "Test@1234"
+    },
+
+    "invaliduser" : {
+        "email" : "invalidtestadmin@test.com",
+        "password" : "Test@1234"
+    }
+}

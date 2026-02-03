@@ -9,14 +9,14 @@ export class LoginPage{
 
     constructor (page : Page){
         this.page = page;
-        this.username = page.locator('[data-qa= "login-email"]');
-        this.password = page.getByPlaceholder('Password');
-        this.loginBtn = page.locator('[data-qa= "login-button"]');
-        this.linkToLogin = page.getByRole('link', {name : ' Signup / Login'});
+        this.username = page.getByRole('textbox', { name: 'Email' });
+        this.password = page.getByRole('textbox', { name: 'Password' });
+        this.loginBtn = page.getByTestId('login-button');
+        this.linkToLogin = page.getByRole('link', {name : 'Login'});
     }
 
     async navigateToHomePage() {
-        await this.page.goto('https://automationexercise.com/');
+        await this.page.goto('https://demo.qatestacademy.com/');
 
     }
 
