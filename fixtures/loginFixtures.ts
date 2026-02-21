@@ -5,13 +5,13 @@ type MyFixtures = {
     loggedinpage : Page;
 };
 
-export const test = base.extend<MyFixtures>({
+export const test = base.extend<MyFixtures>({   
     loggedinpage: async({page},use)=>{
         
-        await page.goto(process.env.BASE_URL!);
+        await page.goto('/');
         const loginpage = new LoginPage(page);
-        loginpage.navigateToLoginPage();
-        await loginpage.login(process.env.USERNAME!, process.env.PASSWORD!);
+        await loginpage.navigateToLoginPage();
+        await loginpage.login(process.env.ADMIN_USERNAME!, process.env.ADMIN_PASSWORD!);
 
 
         await use(page);
