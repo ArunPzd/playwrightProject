@@ -12,6 +12,7 @@ jobs:
 
     env:
       BASE_URL: ${{ vars.BASE_URL }}
+      CLOUD_BASE_URL: ${{ vars.CLOUD_BASE_URL }}
       ADMIN_USERNAME: ${{ secrets.ADMIN_USERNAME }}
       ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
 
