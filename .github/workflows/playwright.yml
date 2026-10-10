@@ -8,6 +8,9 @@ on:
 jobs:
   test:
     timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
     runs-on: ubuntu-latest
 
     env:
@@ -45,8 +48,22 @@ jobs:
         docker logs cloud-qa-lab-ci
         exit 1
 
+    
     - name: Run Playwright tests
       run: npx playwright test
+
+    - name: Log in to GitHub Container Registry
+      if: github.event_name != 'pull_request'
+      run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+
+    - name: Tag Docker image
+      if: github.event_name != 'pull_request'
+      run: docker tag cloud-qa-lab:ci ghcr.io/arunpzd/cloud-qa-lab:latest
+
+    - name: Push Docker image
+      if: github.event_name != 'pull_request'
+      run: docker push ghcr.io/arunpzd/cloud-qa-lab:latest
+
 
       
     - name: Stop Cloud QA Lab container
