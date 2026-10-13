@@ -10,7 +10,7 @@ test('verify ordering product', async({loggedinpage}) => {
     const alerts: string[] = [];
     expectAlert(loggedinpage, alerts);
 
-    await expect(loggedinpage).toHaveURL(/produs/);
+    await expect(loggedinpage).toHaveURL(/products/);
     
     await product.addToCart('Playwright Book');
     await product.addToCart('API Testing Guide');
