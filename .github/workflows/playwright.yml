@@ -29,6 +29,12 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: arn:aws:iam::422632816973:role/GitHubActionsCloudQALabDeployRole
+        aws-region: us-east-2
       
     - name: Build Cloud QA Lab Docker image
       run: docker build -t cloud-qa-lab:ci ./cloud-qa-lab
